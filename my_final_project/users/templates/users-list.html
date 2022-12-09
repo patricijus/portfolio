@@ -1,5 +1,9 @@
+{% extends 'index.html' %}
+{% block content %}
 {% for user in users %}
 
 <p>{{ user.id }} - {{ user.username }}</p>
 
 {% endfor %}
+
+{% endblock %}

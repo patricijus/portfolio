@@ -11,17 +11,23 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <h1>My Projects</h1>
+    <div class="header">
+        <h1>Header + other</h1>
+    </div>
+    <div class="sidebar">
+        <div>Menu item1</div>
+        <div>Menu item2</div>
+        <div>Menu item3</div>
+    </div>
+    <div class="body">
+        <div class="content">
+            <h1>My Projects</h1>
+        {% block content %}{% endblock %}
+        </div>
+        
+    </div>
 
-    <div>
-        <p>Freshmax Inventory Management App</p>
-    </div>
-    <div>
-        <p>Farm Foods MRP System</p>
-    </div>
-    <div>
-        <p>Thomas Foods Booking model</p>
-    </div>
+
 
  
 </body>

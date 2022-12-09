@@ -1,4 +1,41 @@
 body {
     padding: 60px 0;
-    background: #ffffff;
+    background: #a46060;
+    }
+    .header {
+        height: 100px;
+        width: 100%;
+        background: #fff;
+        position: absolute;
+        left:0;
+        top:0;       
+    }
+
+    .sidebar {
+        height: 100%;
+        width: 150px;
+        position: absolute;
+        left:0;
+        top:100px;
+        padding-top: 40px;
+        background-color: bisque;
+    }
+
+    .sidebar div {
+        padding: 8px;
+        font-size: 24px;
+        display: block;
+    }
+
+    .body {
+        margin-left: 150px;
+        font-size: 18px;
+        top:100px;
+        padding-top: 20px;
+        
+    }
+    
+    .content {
+        background: #fff;
+        align-content: center;
     }
