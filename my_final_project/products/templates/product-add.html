@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+
+<form method="POST">
+    {{ form.csrf_token }}
+    {{ form.name.label }} {{ form.name(size=20) }}
+    <input type="submit" value="Go">
+</form>
+{% if error %}
+    <p>{{error}}</p>
+{% endif %}
+{% endblock content %}
