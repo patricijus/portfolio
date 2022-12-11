@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            margin:0;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+
+            display: grid;
+
+            /* grid-template-columns: 1fr 1fr 1fr; */
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: 50px 1fr 1fr 50px;
+            gap: 10px;
+
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .container div {
+            padding: 10px;
+            border: 1px solid #000;
+        }
+
+        .header {
+            grid-column-start: 1;
+            grid-column-end: 5;
+            text-align: center;
+        }
+
+        .sidebar {
+            grid-row-start: 2;
+            grid-row-end: span 2;
+        }
+        .main {
+            grid-row-start: 2;
+            grid-row-end: span 2;
+            grid-column-end: span 3;
+        }
+        .footer {
+            grid-column-start: 1;
+            grid-column-end: 5;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Header</div>
+    
+        <div class="sidebar">Content 1 LG</div>
+        <div class="main">Content 2 LG</div>
+    
+        <div class="footer">
+            Footer
+        </div>
+    </div>
+</body>
+</html>
