@@ -3,7 +3,11 @@ from .models import Product
 from .forms import ProductForm
 from my_final_project import db
 
-bp = Blueprint('products', __name__, template_folder='templates', url_prefix='/products')
+bp = Blueprint('products', __name__, template_folder='templates', url_prefix='/')
+
+@bp.route('/')
+def main():
+    return render_template('product-main.html')
 
 @bp.route('/product_list')
 def product_list():
