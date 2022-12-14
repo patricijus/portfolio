@@ -1,14 +1,9 @@
 {% extends 'index.html' %}
-
 {% block content %}
-
-
 <form method="POST">
     {{ form.csrf_token }}
     {{ form.name.label }} {{ form.name(size=20) }}
-    {{ form.internal_code.label }} {{ form.internal_code(size=20) }}
-    {{ form.customer_code.label }} {{ form.customer_code(size=20) }}
-    <input type="submit" value="Submit">
+    <input type="submit" value="Go">
 </form>
 {% if error %}
     <p>{{error}}</p>

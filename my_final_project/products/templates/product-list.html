@@ -5,13 +5,17 @@
     <thead>
         <tr>
             <th scope="col">ID</th>
+            <th scope="col">Internal Code</th>
+            <th scope="col">Customer Code</th>
             <th scope="col">Description</th>
         </tr>
     </thead>
     <tbody>
     {% for product in products %}
     <tr>
-        <td>{{ product.id }}</td>
+        <td><a href="{{ url_for('products.edit_product', id=product.id) }}">{{ product.id }}</a></td>
+        <td>{{ product.internal_code }}</td>
+        <td>{{ product.customer_code }}</td>
         <td>{{ product.name }}</td>
         <td>Edit</td>
         <td>Delete</td>
