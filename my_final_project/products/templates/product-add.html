@@ -1,13 +1,14 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
 
 <form method="POST">
     {{ form.csrf_token }}
-    {{ form.name.label }} {{ form.name(size=20) }}
+    
     {{ form.internal_code.label }} {{ form.internal_code(size=20) }}
     {{ form.customer_code.label }} {{ form.customer_code(size=20) }}
+    {{ form.name.label }} {{ form.name(size=20) }}
     {{ form.category_id.label }} {{ form.category_id }}
     <input type="submit" value="Submit">
 </form>

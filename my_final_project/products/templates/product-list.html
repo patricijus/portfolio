@@ -1,7 +1,7 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-<table class="table">
+<table class="table" id="products">
     <thead>
         <tr>
             <th scope="col">ID</th>
@@ -17,8 +17,8 @@
         <td>{{ product.internal_code }}</td>
         <td>{{ product.customer_code }}</td>
         <td>{{ product.name }}</td>
-        <td>Edit</td>
-        <td>Delete</td>
+        
+        <td><a href="{{ url_for('products.delete_product', id=product.id) }}">Delete</a></td>
     </tr>
         
     {% endfor %}
