@@ -1,9 +1,7 @@
 from my_final_project import db
 from dataclasses import dataclass
 
-# class User(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     username = db.Column(db.String, unique=True, nullable=False)
+
 class Product(db.Model):
 
     id: int
@@ -18,6 +16,7 @@ class Product(db.Model):
     name = db.Column(db.String, unique=True, nullable=False)
 
     category_id = db.Column(db.Integer, db.ForeignKey('product_category.id'))
+    production_line_id = db.Column(db.Integer, db.ForeignKey('production_line.id'))
 
     def __repr__(self) -> str:
         return f"Product({id}, '{self.name}'"
@@ -35,5 +34,19 @@ class ProductCategory(db.Model):
 
     def __repr__(self) -> str:
         return f"ProductCategory({id}, '{self.name}'"
+
+
+class ProductionLine(db.Model):
+    __tablename__ = 'production_line'
+
+    id: int
+    name: str
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True, nullable=False)
+
+    def __repr__(self) -> str:
+        return f"ProductionLine({id}, '{self.name}'"
+
 
 

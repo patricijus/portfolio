@@ -1,7 +1,6 @@
 
 from flask import render_template, Blueprint, redirect, request, url_for
-from sqlalchemy.exc import IntegrityError
-from .models import Product, ProductCategory
+from .models import Product, ProductCategory, ProductionLine
 from .forms import ProductForm
 from my_final_project import db
 
@@ -20,27 +19,25 @@ def product_list():
 @bp.route('/add_product', methods=['GET', 'POST'])
 def add_product():
     categories = ProductCategory.query.all()
+    production_lines = ProductionLine.query.all()
     CATEGORIES = [(category.id, category.name) for category in categories]
+    PRODUCTION_LINES = [(line.id, line.name) for line in production_lines]
     form = ProductForm()
     form.category_id.choices = CATEGORIES
+    form.production_line_id.choices = PRODUCTION_LINES
     error = None
     if form.validate_on_submit():
-        try:
         
-            product = Product(
-                name=form.name.data,
-                customer_code=form.customer_code.data,
-                internal_code=form.internal_code.data,
-                category_id=form.category_id.data)
-                
-            db.session.add(product)
-            db.session.commit()
-
-        except IntegrityError:
-            error = "Duplicate"
-            db.session.rollback()
-            return redirect(url_for('products.add_product'))        
-
+        
+        product = Product(
+            name=form.name.data,
+            customer_code=form.customer_code.data,
+            internal_code=form.internal_code.data,
+            category_id=form.category_id.data)
+            
+        db.session.add(product)
+        db.session.commit()
+        print(form.category_id.data)
         return redirect(url_for('products.product_list'))
 
     return render_template('product-add.html', form=form)
@@ -79,35 +76,35 @@ def add_product():
 
 @bp.route('/edit_product/<int:id>', methods=['GET','POST'])
 def edit_product(id):
-    categories = ProductCategory.query.all()
-    CATEGORIES = [(category.id, category.name) for category in categories]
-
     product = Product.query.filter_by(id=id).first()
-    
-    form = ProductForm(category_id = product.category_id)
+    categories = ProductCategory.query.all()
+    production_lines = ProductionLine.query.all()
+    PRODUCTION_LINES = [(line.id, line.name) for line in production_lines]
+    CATEGORIES = [(category.id, category.name) for category in categories]
+    product = Product.query.filter_by(id=id).first()
+    form = ProductForm(
+        category_id=product.category_id,
+        production_line_id=product.production_line_id
+    )
     form.category_id.choices = CATEGORIES
+    form.production_line_id.choices = PRODUCTION_LINES
     
-    if request.method == 'POST' and form.validate_on_submit():
-        try:
-            product.name = form.name.data
-            product.customer_code = form.customer_code.data
-            product.internal_code = form.internal_code.data
-            product.category_id = form.category_id.data
-            db.session.commit()
-            return redirect(url_for('products.product_list'))
-        except IntegrityError:
-            error = "Duplicate"
-            db.session.rollback()
-            return redirect(url_for('products.product_list'))
 
+    if form.validate_on_submit():
+        product.name = form.name.data
+        product.customer_code = form.customer_code.data
+        product.internal_code = form.internal_code.data
+        product.category_id = form.category_id.data
+        product.production_line_id = form.production_line_id.data
+        db.session.commit()
+        return redirect(url_for('products.product_list'))
     if request.method == 'GET':
 
         form.name.data = product.name
         form.customer_code.data = product.customer_code
         form.internal_code.data = product.internal_code
-        # form.category_id.data = product.category_id
-        # form.category_id.default = -product.category_id
-        
+        form.category_id.default = product.category_id
+        form.production_line_id.default = product.production_line_id
         return render_template('product-add.html', form=form)
 
     return redirect(url_for('products.product_list'))    

@@ -9,6 +9,7 @@ class ProductForm(FlaskForm):
     internal_code = StringField('Internal Code', validators=[DataRequired()])
     customer_code = StringField('Customer Code', validators=[DataRequired()])
     category_id = SelectField(choices=[])
+    production_line_id = SelectField(choices=[])
 
 
 class ProductCategoryForm(FlaskForm):
