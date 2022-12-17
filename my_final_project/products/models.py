@@ -18,6 +18,8 @@ class Product(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('product_category.id'))
     production_line_id = db.Column(db.Integer, db.ForeignKey('production_line.id'))
 
+    category = db.relationship('ProductCategory', backref=db.backref('products', lazy='dynamic'))
+    prod_line = db.relationship('ProductionLine', backref=db.backref('products', lazy='dynamic'))
     def __repr__(self) -> str:
         return f"Product({id}, '{self.name}'"
 
@@ -33,7 +35,7 @@ class ProductCategory(db.Model):
     name = db.Column(db.String, unique=True, nullable=False)
 
     def __repr__(self) -> str:
-        return f"ProductCategory({id}, '{self.name}'"
+        return f"{self.name}"
 
 
 class ProductionLine(db.Model):
@@ -46,7 +48,7 @@ class ProductionLine(db.Model):
     name = db.Column(db.String, unique=True, nullable=False)
 
     def __repr__(self) -> str:
-        return f"ProductionLine({id}, '{self.name}'"
+        return f"{self.name}"
 
 
 
