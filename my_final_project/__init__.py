@@ -4,8 +4,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-# from flask_admin import Admin
-# from flask_admin.contrib.sqla import ModelView
+
 ################
 #### config ####
 ################
@@ -22,22 +21,6 @@ from my_final_project.products.models import Product, ProductCategory, Productio
 def make_shell_context():
     return {'db': db, 'User': User, 'Product': Product, 'ProductCategory': ProductCategory, 'ProductionLine': ProductionLine}
 
-
-
-# # set optional bootswatch theme
-# app.config['FLASK_ADMIN_SWATCH'] = 'simplex'
-
-# admin = Admin(app, name='MRP', template_mode='bootstrap4')
-# # Add administrative views here
-
-# class CustomModelViewName(ModelView):
-#     can_delete = False
-#     column_hide_backrefs = False
-
-
-# admin.add_view(ModelView(ProductCategory, db.session, category='Product'))
-# admin.add_view(ModelView(ProductionLine, db.session, category='Product'))
-# admin.add_view(CustomModelViewName(Product, db.session, category='Product'))
 
 from my_final_project.admin import Admin
 from my_final_project.users.views import bp as users_blueprint

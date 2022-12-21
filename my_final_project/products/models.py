@@ -1,7 +1,7 @@
 from my_final_project import db
 from dataclasses import dataclass
 
-
+@dataclass
 class Product(db.Model):
 
     id: int
@@ -21,9 +21,9 @@ class Product(db.Model):
     category = db.relationship('ProductCategory', backref=db.backref('products', lazy='dynamic'))
     prod_line = db.relationship('ProductionLine', backref=db.backref('products', lazy='dynamic'))
     def __repr__(self) -> str:
-        return f"Product({id}, '{self.name}'"
+        return f"{self.name}"
 
-
+@dataclass
 class ProductCategory(db.Model):
 
     __tablename__ = 'product_category'
@@ -37,7 +37,7 @@ class ProductCategory(db.Model):
     def __repr__(self) -> str:
         return f"{self.name}"
 
-
+@dataclass
 class ProductionLine(db.Model):
     __tablename__ = 'production_line'
 
